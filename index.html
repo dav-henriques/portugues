@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101833" />
+  <meta name="description" content="Revisão interativa de Português e Literatura para a prova final da 2ª série." />
+  <title>Revisão Expressa — Português & Literatura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+:root {
+  --ink: #101833;
+  --muted: #5c6680;
+  --paper: #f5f7fb;
+  --white: #ffffff;
+  --line: #dbe1eb;
+  --lime: #b8f35c;
+  --lime-deep: #5f8d16;
+  --coral: #ff6f61;
+  --blue: #5c7cff;
+  --violet: #875cff;
+  --yellow: #ffd166;
+  --serif: "DM Serif Display", Georgia, serif;
+  --sans: "DM Sans", system-ui, sans-serif;
+  --shadow: 0 24px 70px rgba(16, 24, 51, .12);
+  --radius: 22px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+body.focus-mode .topbar nav, body.focus-mode .topic-rail, body.focus-mode footer { opacity: .18; pointer-events: none; }
+body.focus-mode .lesson { opacity: .15; filter: saturate(.4); transition: .3s ease; }
+body.focus-mode .lesson:hover, body.focus-mode .lesson:focus-within, body.focus-mode .lesson.in-view { opacity: 1; filter: none; }
+button, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; }
+::selection { color: var(--ink); background: var(--lime); }
+
+.grain { position: fixed; inset: 0; z-index: 100; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.topbar { position: sticky; top: 0; z-index: 50; height: 70px; padding: 0 clamp(20px, 4vw, 64px); display: flex; align-items: center; gap: 32px; border-bottom: 1px solid rgba(219,225,235,.85); background: rgba(245,247,251,.82); backdrop-filter: blur(18px); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; color: white; background: var(--ink); font-weight: 700; }
+.brand-mark span { color: var(--lime); }
+.topbar nav { margin-left: auto; display: flex; gap: 28px; color: var(--muted); font-size: .92rem; transition: .3s; }
+.topbar nav a { position: relative; }
+.topbar nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 2px; background: var(--ink); transition: .25s; }
+.topbar nav a:hover::after { right: 0; }
+.icon-button { width: 40px; height: 40px; padding: 9px; border: 1px solid var(--line); border-radius: 50%; background: white; cursor: pointer; }
+.icon-button[aria-pressed="true"] { background: var(--lime); border-color: var(--lime); }
+.icon-button svg { width: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+
+main { overflow: hidden; }
+.hero { min-height: calc(100svh - 70px); max-width: 1440px; margin: 0 auto; padding: clamp(70px, 10vw, 130px) clamp(24px, 7vw, 100px); display: grid; grid-template-columns: 1.08fr .92fr; align-items: center; gap: 70px; position: relative; }
+.eyebrow, .kicker { margin: 0 0 18px; color: var(--muted); text-transform: uppercase; letter-spacing: .14em; font-size: .76rem; font-weight: 700; }
+.eyebrow { display: flex; align-items: center; gap: 10px; }
+.eyebrow span { width: 34px; height: 2px; background: var(--coral); }
+.hero h1 { margin: 0; font-family: var(--serif); font-size: clamp(4rem, 8vw, 8rem); line-height: .86; letter-spacing: -.055em; font-weight: 400; }
+.hero h1 em { color: var(--coral); font-weight: 400; }
+.hero-lead { max-width: 630px; margin: 30px 0 0; color: var(--muted); font-size: clamp(1.05rem, 1.6vw, 1.3rem); }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+.button { min-height: 48px; padding: 0 22px; border: 1px solid var(--ink); border-radius: 13px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+.button:hover { transform: translateY(-2px); }
+.button.primary { color: white; background: var(--ink); box-shadow: 0 8px 20px rgba(16,24,51,.14); }
+.button.primary:hover { box-shadow: 0 12px 28px rgba(16,24,51,.22); }
+.button.ghost { background: transparent; }
+.button.small { min-height: 43px; padding: 0 18px; }
+.session-note { margin-top: 30px; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .9rem; }
+.pulse-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--lime-deep); box-shadow: 0 0 0 5px rgba(184,243,92,.35); }
+.hero-visual { aspect-ratio: 1; max-width: 560px; width: 100%; justify-self: center; position: relative; display: grid; place-items: center; }
+.orbit { position: absolute; inset: 13%; border: 1px solid #b9c2d5; border-radius: 50%; }
+.orbit-two { inset: 28%; border-style: dashed; }
+.core-word { width: 145px; height: 145px; display: grid; place-items: center; border-radius: 50%; background: var(--lime); font-family: var(--serif); font-size: 1.75rem; box-shadow: var(--shadow); z-index: 3; }
+.floating-word { position: absolute; padding: 10px 16px; border: 1px solid var(--line); border-radius: 99px; background: rgba(255,255,255,.9); font-weight: 600; box-shadow: 0 8px 30px rgba(16,24,51,.08); z-index: 3; }
+.word-a { left: 2%; top: 40%; } .word-b { right: 0; top: 20%; } .word-c { right: 6%; bottom: 22%; } .word-d { left: 20%; bottom: 1%; }
+.scribble { position: absolute; inset: 4%; width: 92%; height: 92%; overflow: visible; }
+.scribble path { fill: none; stroke: var(--coral); stroke-width: 2.2; stroke-dasharray: 9 8; }
+
+.map-section { padding: 90px clamp(24px, 7vw, 100px); background: var(--ink); color: white; }
+.section-heading { max-width: 760px; margin-bottom: 46px; }
+.section-heading.compact h2 { margin: 0 0 14px; font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.8rem); font-weight: 400; line-height: .98; letter-spacing: -.03em; }
+.section-heading p:last-child { color: #aeb8cf; font-size: 1.05rem; }
+.topic-rail { display: flex; gap: 12px; flex-wrap: wrap; transition: .3s; }
+.topic-chip { padding: 13px 17px; display: flex; align-items: center; gap: 10px; border: 1px solid #34405e; border-radius: 99px; color: #dce3f3; transition: .25s; }
+.topic-chip span { color: var(--lime); font-size: .75rem; font-weight: 700; }
+.topic-chip:hover { color: var(--ink); background: var(--lime); border-color: var(--lime); transform: translateY(-3px); }
+.topic-chip:hover span { color: var(--ink); }
+.topic-chip.literature span { color: var(--coral); }
+
+.domain-section { padding: 110px clamp(24px, 7vw, 100px); max-width: 1440px; margin: 0 auto; }
+.domain-banner { min-height: 280px; margin-bottom: 130px; padding: clamp(32px, 5vw, 70px); display: grid; grid-template-columns: auto 1fr minmax(240px, 380px); align-items: center; gap: 36px; border-radius: 30px; overflow: hidden; position: relative; }
+.grammar-banner { background: var(--lime); }
+.literature-banner { color: white; background: var(--ink); }
+.domain-number { font-family: var(--serif); font-size: clamp(5rem, 10vw, 9rem); line-height: 1; opacity: .2; }
+.domain-banner h2 { margin: 0; max-width: 600px; font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 5rem); font-weight: 400; line-height: .95; letter-spacing: -.03em; }
+.domain-banner p:last-child { margin: 0; font-size: 1.08rem; }
+.lesson { max-width: 1160px; margin: 0 auto 160px; }
+.lesson:last-child { margin-bottom: 30px; }
+.lesson-intro { max-width: 840px; margin-bottom: 48px; }
+.lesson-index { margin: 0 0 12px; color: var(--coral); text-transform: uppercase; letter-spacing: .13em; font-size: .76rem; font-weight: 700; }
+.lesson h3 { margin: 0 0 20px; font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 5.2rem); font-weight: 400; line-height: .98; letter-spacing: -.035em; }
+.lesson-intro > p:last-child, .work-title > div > p:last-child { color: var(--muted); font-size: 1.15rem; }
+.concept-split { display: grid; grid-template-columns: 1fr auto 1fr; gap: 28px; align-items: stretch; }
+.concept-column { padding: 34px; border: 1px solid var(--line); border-radius: var(--radius); background: white; }
+.concept-column.compound { color: white; background: var(--ink); border-color: var(--ink); }
+.mini-label { color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 700; }
+.compound .mini-label { color: var(--lime); }
+.concept-column h4 { margin: 10px 0 4px; font-size: 1.5rem; }
+.concept-column p { margin: 0; color: var(--muted); }
+.compound p { color: #b9c3d8; }
+.sentence-demo { min-height: 88px; margin: 30px 0 18px; padding: 18px; display: flex; flex-wrap: wrap; align-content: center; gap: 6px; border-radius: 13px; background: var(--paper); font-size: 1.08rem; }
+.compound .sentence-demo { background: #1d2947; }
+.sentence-demo mark { padding: 0 4px; color: var(--ink); background: var(--lime); border-radius: 5px; font-weight: 700; }
+.concept-column small { color: var(--muted); font-weight: 700; }
+.compound small { color: #9eabc7; }
+.divider-or { display: grid; place-items: center; }
+.divider-or span { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); color: var(--muted); font-size: .82rem; }
+.tip-strip { margin-top: 16px; padding: 18px 22px; border-left: 4px solid var(--yellow); background: #fff9e9; border-radius: 0 12px 12px 0; }
+
+.activity { margin-top: 48px; padding: clamp(24px, 4vw, 44px); color: white; background: var(--ink); border-radius: 26px; box-shadow: var(--shadow); }
+.activity-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; margin-bottom: 32px; }
+.activity-head h4 { margin: 8px 0 0; font-size: 1.55rem; }
+.activity-head p { max-width: 440px; margin: 0; color: #aeb8cf; text-align: right; }
+.activity-tag { color: var(--lime); text-transform: uppercase; letter-spacing: .12em; font-size: .7rem; font-weight: 700; }
+.click-sentence { min-height: 110px; padding: 26px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 7px; border: 1px solid #34405e; border-radius: 17px; background: #141f3b; font-size: clamp(1.05rem, 2.3vw, 1.5rem); }
+.click-sentence button { padding: 5px 7px; border: 1px solid transparent; border-radius: 7px; color: white; background: transparent; cursor: pointer; }
+.click-sentence button:hover { border-color: #667391; }
+.click-sentence button.selected { color: var(--ink); background: var(--lime); }
+.click-sentence button.wrong-pick { background: var(--coral); }
+.choice-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.choice-row button, .choice-grid button { min-height: 46px; padding: 10px 18px; border: 1px solid #455271; border-radius: 12px; color: white; background: transparent; cursor: pointer; transition: .2s; }
+.choice-row button:hover, .choice-grid button:hover { border-color: var(--lime); transform: translateY(-2px); }
+.choice-row button.correct, .choice-grid button.correct, .exam-options button.correct { color: var(--ink); background: var(--lime); border-color: var(--lime); }
+.choice-row button.wrong, .choice-grid button.wrong, .exam-options button.wrong { color: white; background: var(--coral); border-color: var(--coral); }
+.feedback { display: none; margin-top: 20px; padding: 17px 19px; border-radius: 12px; color: #dce3f3; background: #1b2744; }
+.feedback.show { display: block; animation: slideIn .3s ease both; }
+.feedback strong { color: var(--lime); }
+.feedback.error strong { color: #ffb3ab; }
+@keyframes slideIn { from { opacity: 0; transform: translateY(8px); } }
+
+.relation-machine { min-height: 390px; position: relative; display: grid; place-items: center; margin: 36px 0 42px; border: 1px solid var(--line); border-radius: 28px; background: white; overflow: hidden; }
+.relation-machine::before { content: ""; position: absolute; width: 450px; height: 450px; border: 1px solid var(--line); border-radius: 50%; }
+.machine-main { z-index: 2; padding: 18px 25px; border-radius: 16px; color: white; background: var(--ink); font-weight: 700; box-shadow: var(--shadow); }
+.connector-pill { position: absolute; z-index: 2; padding: 9px 13px; border: 1px solid var(--line); border-radius: 99px; background: white; cursor: pointer; }
+.connector-pill:nth-of-type(1) { left: 7%; top: 18%; }
+.connector-pill:nth-of-type(2) { right: 7%; top: 15%; }
+.connector-pill:nth-of-type(3) { left: 8%; bottom: 20%; }
+.connector-pill:nth-of-type(4) { right: 5%; bottom: 23%; }
+.connector-pill.active { background: var(--lime); border-color: var(--lime); font-weight: 700; }
+.relation-output { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); width: min(420px, 86%); padding: 12px 18px; display: flex; align-items: center; gap: 13px; border-radius: 12px; background: #f0f3f8; font-size: .88rem; }
+.relation-output strong { color: var(--coral); letter-spacing: .08em; font-size: .72rem; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 19px; background: white; }
+.meaning-table { width: 100%; border-collapse: collapse; min-width: 760px; }
+.meaning-table th, .meaning-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid var(--line); }
+.meaning-table th { color: var(--muted); background: #eef2f7; text-transform: uppercase; letter-spacing: .08em; font-size: .7rem; }
+.meaning-table td { font-size: .94rem; }
+.meaning-table tr:last-child td { border-bottom: 0; }
+.meaning-table tr:hover td { background: #fbfcfe; }
+.prompt-box { padding: 22px; border: 1px solid #34405e; border-radius: 15px; background: #141f3b; font-size: clamp(1.1rem, 2.4vw, 1.45rem); }
+.prompt-box u { text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+.text-button { margin-top: 20px; padding: 0 0 5px; color: var(--lime); border: 0; border-bottom: 1px solid var(--lime); background: transparent; font-weight: 700; cursor: pointer; }
+.hidden { display: none !important; }
+
+.comma-switcher { min-height: 460px; display: grid; grid-template-columns: .86fr 1.14fr; border: 1px solid var(--line); border-radius: 28px; background: white; overflow: hidden; }
+.switch-copy { padding: clamp(30px, 5vw, 60px); display: flex; flex-direction: column; justify-content: center; background: #eef2f7; }
+.switch-copy h4 { margin: 10px 0; font-size: 1.7rem; line-height: 1.15; }
+.switch-copy p { color: var(--muted); }
+.toggle { margin-top: 20px; padding: 0; display: flex; align-items: center; gap: 12px; border: 0; background: transparent; cursor: pointer; font-size: .9rem; }
+.toggle span { width: 56px; height: 30px; padding: 4px; border-radius: 99px; background: #c8d0df; transition: .3s; }
+.toggle span::after { content: ""; display: block; width: 22px; height: 22px; border-radius: 50%; background: white; transition: .3s; box-shadow: 0 2px 8px rgba(16,24,51,.2); }
+.toggle[aria-pressed="true"] span { background: var(--coral); }
+.toggle[aria-pressed="true"] span::after { transform: translateX(26px); }
+.students-visual { padding: clamp(30px, 5vw, 65px); display: flex; flex-direction: column; justify-content: center; }
+.sentence-stage { margin-bottom: 44px; text-align: center; font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.25rem); }
+.sentence-stage mark { color: inherit; background: linear-gradient(transparent 65%, rgba(184,243,92,.7) 65%); }
+.people-row { display: flex; justify-content: center; gap: clamp(8px, 2vw, 18px); }
+.person { width: clamp(42px, 7vw, 65px); aspect-ratio: 1; display: grid; place-items: center; border: 2px solid #c8d0df; border-radius: 50% 50% 43% 43%; color: #9ca7ba; font-weight: 700; transition: .4s; }
+.person.studied { color: var(--ink); border-color: var(--lime-deep); background: var(--lime); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(95,141,22,.17); }
+.students-visual.explanatory .person { color: var(--ink); border-color: var(--lime-deep); background: var(--lime); transform: translateY(-8px); }
+.legend { margin-top: 32px; display: flex; justify-content: center; gap: 20px; color: var(--muted); font-size: .75rem; }
+.legend span { display: flex; align-items: center; gap: 7px; }
+.dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; }
+.pass { background: var(--lime-deep); } .no-pass { background: #c8d0df; }
+.compare-lines { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.compare-lines div { padding: 24px; background: white; }
+.compare-lines strong { display: block; font-size: 1.2rem; }
+.compare-lines span { color: var(--coral); font-size: .8rem; font-weight: 700; }
+.compare-lines p { margin-bottom: 0; color: var(--muted); font-size: .92rem; }
+
+.bridge-demo { margin-bottom: 30px; padding: clamp(28px, 5vw, 55px); text-align: center; border-radius: 26px; color: white; background: var(--ink); }
+.bridge-part { display: flex; justify-content: center; gap: 25px; color: #aeb8cf; }
+.bridge-arrow { width: min(500px, 85%); height: 58px; margin: 20px auto; display: grid; place-items: center; border-bottom: 2px solid var(--coral); color: var(--coral); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
+.bridge-result { font-family: var(--serif); font-size: clamp(1.55rem, 4vw, 2.6rem); }
+.bridge-result button { padding: 2px 7px; border: 0; border-radius: 6px; font-family: inherit; font-size: inherit; cursor: default; }
+.antecedent { background: var(--lime); } .relative { color: white; background: var(--coral); }
+.bridge-demo > p { margin: 28px auto 0; max-width: 690px; color: #aeb8cf; }
+.relative-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.relative-grid button { padding: 20px; display: flex; flex-direction: column; align-items: flex-start; border: 1px solid var(--line); border-radius: 14px; background: white; cursor: pointer; text-align: left; transition: .2s; }
+.relative-grid button:hover, .relative-grid button.active { border-color: var(--blue); box-shadow: 0 8px 25px rgba(92,124,255,.12); transform: translateY(-2px); }
+.relative-grid b { font-size: 1.2rem; }
+.relative-grid span { margin-top: 4px; color: var(--muted); font-size: .82rem; }
+.relative-detail { min-height: 74px; margin-top: 12px; padding: 18px 22px; border-left: 4px solid var(--blue); border-radius: 0 12px 12px 0; background: #edf0ff; }
+.relative-detail p { margin: 0; }
+.dual-select { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end; }
+.dual-select label { color: #aeb8cf; font-size: .8rem; }
+.dual-select select { width: 100%; height: 44px; margin-top: 7px; padding: 0 38px 0 13px; color: white; border: 1px solid #455271; border-radius: 10px; background: #141f3b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m6 8 4 4 4-4' fill='none' stroke='%23b8f35c' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat right 10px center/20px; appearance: none; }
+
+.literature-domain { max-width: none; background: white; }
+.literature-domain > * { max-width: 1160px; margin-left: auto; margin-right: auto; }
+.literature-domain .domain-banner { max-width: 1300px; }
+.timeline { height: 190px; position: relative; display: flex; justify-content: space-between; align-items: center; }
+.time-line { position: absolute; left: 5%; right: 5%; top: 50%; height: 2px; background: var(--line); }
+.time-point { z-index: 2; width: 100px; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; border: 0; background: transparent; cursor: pointer; }
+.time-point::before { content: ""; width: 18px; height: 18px; margin-bottom: 10px; border: 5px solid white; border-radius: 50%; background: #aeb8cf; box-shadow: 0 0 0 1px var(--line); transition: .25s; }
+.time-point.active::before { background: var(--coral); transform: scale(1.35); }
+.time-point span { color: var(--coral); font-size: .78rem; font-weight: 700; }
+.time-point b { font-size: .82rem; }
+.timeline-detail { min-height: 105px; padding: 22px 25px; border: 1px solid var(--line); border-radius: 15px; background: var(--paper); }
+.timeline-detail p { margin: 6px 0 0; color: var(--muted); }
+.idea-constellation { height: 420px; margin: 45px 0 30px; position: relative; border-radius: 30px; background: var(--ink); overflow: hidden; }
+.idea-constellation::before, .idea-constellation::after { content: ""; position: absolute; width: 300px; height: 300px; border: 1px solid #35405d; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%,-50%); }
+.idea-constellation::after { width: 490px; height: 490px; }
+.constellation-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 160px; height: 160px; display: grid; place-items: center; border-radius: 50%; background: var(--coral); color: white; font-family: var(--serif); font-size: 1.6rem; z-index: 2; }
+.idea-constellation span { position: absolute; left: var(--x); top: var(--y); padding: 9px 13px; border: 1px solid #455271; border-radius: 99px; color: #dce3f3; background: #17223f; font-size: .86rem; z-index: 3; }
+.reading-key { padding: 25px; border-left: 4px solid var(--coral); background: #fff2f0; }
+.authors-strip { margin-top: 42px; display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); }
+.author { padding: 22px 8px; display: flex; gap: 15px; border-bottom: 1px solid var(--line); }
+.author:nth-child(odd) { padding-right: 28px; border-right: 1px solid var(--line); }
+.author:nth-child(even) { padding-left: 28px; }
+.author > span { width: 48px; height: 48px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: var(--paper); color: var(--muted); font-weight: 700; font-size: .8rem; }
+.author div { display: flex; flex-direction: column; }
+.author small { color: var(--muted); }
+.memory-hook { margin-top: 20px; padding: 26px; display: flex; gap: 30px; align-items: center; border-radius: 16px; background: var(--lime); }
+.memory-hook span { flex: 0 0 auto; text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; font-weight: 700; }
+
+.work-title { display: grid; grid-template-columns: 1fr 230px; align-items: center; gap: 70px; }
+.work-title.reverse { grid-template-columns: 230px 1fr; }
+.book-shape { width: 210px; aspect-ratio: .72; padding: 25px 20px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 3px 14px 14px 3px; box-shadow: -9px 8px 0 #dce2eb, 0 22px 45px rgba(16,24,51,.18); transform: rotate(3deg); }
+.book-shape span { font-size: .7rem; letter-spacing: .15em; }
+.book-shape strong { font-family: var(--serif); font-size: 2.1rem; line-height: .85; }
+.book-shape small { line-height: 1.2; }
+.policarpo-cover { color: var(--ink); background: var(--yellow); }
+.sertoes-cover { color: white; background: #9b3d30; transform: rotate(-3deg); }
+.three-acts, .sertões-triad { margin-top: 52px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.act, .triad-item { min-height: 130px; padding: 22px; display: flex; flex-direction: column; align-items: flex-start; border: 0; border-right: 1px solid var(--line); background: white; cursor: pointer; text-align: left; transition: .25s; }
+.act:last-child, .triad-item:last-child { border-right: 0; }
+.act:hover, .act.active, .triad-item:hover, .triad-item.active { background: var(--ink); color: white; }
+.act span, .triad-item span { color: var(--coral); font-size: .75rem; font-weight: 700; }
+.act b, .triad-item b { margin-top: 10px; font-size: 1.3rem; }
+.act small, .triad-item small { color: var(--muted); }
+.act.active small, .triad-item.active small { color: #aeb8cf; }
+.act-detail { min-height: 230px; padding: clamp(28px, 5vw, 55px); display: grid; grid-template-columns: 180px 1fr; gap: 45px; align-items: center; border-radius: 0 0 22px 22px; background: var(--paper); }
+.act-symbol { width: 160px; height: 160px; display: grid; place-items: center; border-radius: 50%; border: 1px dashed var(--coral); color: var(--coral); font-family: var(--serif); font-size: 2rem; }
+.act-detail strong, .triad-detail strong { font-size: 1.25rem; }
+.act-detail p, .triad-detail p { color: var(--muted); }
+.theme-equation { margin: 34px 0; display: flex; gap: 15px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.theme-equation span { padding: 12px 16px; border: 1px solid var(--line); border-radius: 99px; background: white; }
+.theme-equation .result { color: white; border-color: var(--coral); background: var(--coral); }
+.interpretation-box { padding: 30px; border-radius: 18px; color: white; background: var(--ink); }
+.interpretation-box p { margin: 8px 0 0; color: #bdc6d9; }
+.interpretation-box.coral { background: var(--coral); }
+.interpretation-box.coral p { color: white; }
+.landscape { height: 250px; position: relative; background: #ffdf9e; overflow: hidden; }
+.sun { position: absolute; width: 85px; height: 85px; right: 12%; top: 18%; border-radius: 50%; background: #ff8a59; }
+.ridge { position: absolute; left: -5%; width: 110%; height: 180px; bottom: -85px; border-radius: 50% 40% 0 0; background: #c57c50; transform: rotate(-2deg); }
+.ridge.front { bottom: -115px; background: #8d4f39; transform: rotate(4deg); }
+.cactus { position: absolute; left: 18%; bottom: 38px; color: #315d42; font-size: 70px; font-weight: 700; transform: rotate(180deg); }
+.triad-detail { min-height: 115px; padding: 24px 28px; background: #fff4df; }
+.triad-detail p { margin: 5px 0 0; }
+.perspective-shift { margin: 35px 0; display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; }
+.perspective-shift > div:not(.shift-arrow) { padding: 24px; border: 1px solid var(--line); border-radius: 15px; }
+.perspective-shift small { display: block; margin-bottom: 8px; color: var(--muted); }
+.shift-arrow { color: var(--coral); text-align: center; text-transform: uppercase; font-size: .68rem; font-weight: 700; letter-spacing: .08em; }
+
+.versus-grid { border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.versus-head, .versus-row { display: grid; grid-template-columns: 160px 1fr 1fr; }
+.versus-head { color: white; background: var(--ink); }
+.versus-head b { padding: 20px; }
+.versus-row > * { margin: 0; padding: 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.versus-row > *:last-child { border-right: 0; }
+.versus-row span { color: var(--coral); text-transform: uppercase; letter-spacing: .09em; font-size: .72rem; font-weight: 700; }
+.versus-row p { color: var(--muted); }
+.versus-row.shared { grid-template-columns: 160px 1fr; }
+.versus-row.shared p { grid-column: span 2; color: var(--ink); background: var(--lime); font-weight: 700; }
+
+.exam-section { padding: 120px clamp(24px, 7vw, 100px); color: white; background: var(--ink); }
+.exam-intro { max-width: 1160px; margin: 0 auto 48px; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+.exam-intro h2 { margin: 0; font-family: var(--serif); font-size: clamp(3.2rem, 6vw, 6rem); font-weight: 400; line-height: .95; }
+.exam-intro p:last-child { max-width: 650px; color: #aeb8cf; }
+.exam-score { width: 112px; height: 112px; flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #455271; border-radius: 50%; }
+.exam-score span { font-family: var(--serif); font-size: 2.5rem; line-height: 1; }
+.exam-score small { color: #aeb8cf; }
+.exam-shell { max-width: 900px; min-height: 500px; margin: 0 auto; padding: clamp(25px, 5vw, 55px); border: 1px solid #34405e; border-radius: 28px; background: #141f3b; }
+.exam-progress { height: 5px; margin-bottom: 25px; border-radius: 99px; background: #2a3654; overflow: hidden; }
+.exam-progress span { display: block; width: 10%; height: 100%; background: var(--lime); transition: width .4s; }
+.exam-meta { display: flex; justify-content: space-between; color: #8996b3; text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; font-weight: 700; }
+.exam-question { margin: 38px 0 28px; font-family: var(--serif); font-size: clamp(1.65rem, 3.5vw, 2.5rem); line-height: 1.2; }
+.exam-question u { text-decoration-color: var(--coral); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+.exam-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.exam-options button { min-height: 60px; padding: 14px 18px; border: 1px solid #455271; border-radius: 13px; color: white; background: transparent; cursor: pointer; text-align: left; transition: .2s; }
+.exam-options button:hover:not(:disabled) { border-color: var(--lime); transform: translateY(-2px); }
+.exam-options button:disabled { cursor: default; }
+.exam-feedback { display: none; margin: 22px 0; padding: 20px; border-left: 4px solid var(--lime); border-radius: 0 12px 12px 0; background: #1c2948; color: #dce3f3; }
+.exam-feedback.show { display: block; animation: slideIn .3s; }
+.exam-feedback.wrong { border-color: var(--coral); }
+.exam-result { max-width: 800px; margin: 45px auto 0; padding: 35px; display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 35px; border: 1px solid #34405e; border-radius: 24px; }
+.result-ring { width: 140px; height: 140px; display: flex; align-items: baseline; justify-content: center; border: 8px solid var(--lime); border-radius: 50%; padding-top: 35px; }
+.result-ring span { font-family: var(--serif); font-size: 3.5rem; }
+.exam-result h3 { margin: 0; font-family: var(--serif); font-size: 2.5rem; }
+.exam-result p { color: #aeb8cf; }
+
+.rapid-review { padding: 110px clamp(24px, 7vw, 100px); max-width: 1300px; margin: 0 auto; }
+.rapid-review .section-heading p:last-child { color: var(--muted); }
+.flash-list { border-top: 1px solid var(--line); }
+.flash-item { width: 100%; min-height: 84px; padding: 18px 10px; display: grid; grid-template-columns: 170px 1fr 1.2fr; align-items: center; gap: 20px; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; }
+.flash-item span { color: var(--coral); text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; font-weight: 700; }
+.flash-item b { font-size: 1.1rem; }
+.flash-item p { margin: 0; color: var(--muted); opacity: 0; transform: translateX(-15px); transition: .3s; }
+.flash-item.open { background: white; }
+.flash-item.open p, .flash-item:hover p { opacity: 1; transform: none; }
+
+footer { padding: 36px clamp(24px, 7vw, 100px); display: flex; align-items: center; justify-content: space-between; color: white; background: #090e1e; }
+footer div { display: flex; flex-direction: column; }
+footer span { color: #8996b3; font-size: .85rem; }
+footer a { color: var(--lime); }
+.mobile-nav { display: none; }
+
+.challenge-modal[hidden] { display: none; }
+.challenge-modal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 20px; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(5,9,21,.72); backdrop-filter: blur(8px); }
+.modal-card { width: min(500px, 100%); padding: 38px; position: relative; border-radius: 24px; background: white; box-shadow: var(--shadow); }
+.modal-card h3 { margin: 12px 0; font-family: var(--serif); font-size: 2.2rem; }
+.modal-card p { color: var(--muted); }
+.modal-close { position: absolute; right: 16px; top: 12px; border: 0; background: transparent; font-size: 1.8rem; cursor: pointer; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-visual { max-width: 500px; }
+  .domain-banner { grid-template-columns: auto 1fr; }
+  .domain-banner > p:last-child { grid-column: 2; }
+  .comma-switcher { grid-template-columns: 1fr; }
+  .relative-grid { grid-template-columns: repeat(2,1fr); }
+  .work-title, .work-title.reverse { grid-template-columns: 1fr 180px; }
+  .work-title.reverse .book-shape { order: 2; }
+  .book-shape { width: 170px; }
+  .flash-item { grid-template-columns: 140px 1fr; }
+  .flash-item p { grid-column: 2; }
+}
+
+@media (max-width: 680px) {
+  .topbar { height: 62px; padding: 0 17px; }
+  .brand > span:last-child, .topbar nav { display: none; }
+  .icon-button { margin-left: auto; }
+  .hero { padding-top: 70px; gap: 35px; }
+  .hero h1 { font-size: clamp(3.5rem, 18vw, 5.2rem); }
+  .hero-actions .button { width: 100%; }
+  .hero-visual { width: 90%; }
+  .floating-word { font-size: .78rem; }
+  .core-word { width: 110px; height: 110px; font-size: 1.4rem; }
+  .domain-section { padding-top: 70px; }
+  .domain-banner { margin-bottom: 90px; padding: 30px; grid-template-columns: 1fr; gap: 18px; }
+  .domain-number { display: none; }
+  .domain-banner > p:last-child { grid-column: auto; }
+  .lesson { margin-bottom: 110px; }
+  .concept-split { grid-template-columns: 1fr; }
+  .divider-or { height: 15px; }
+  .activity-head { flex-direction: column; }
+  .activity-head p { text-align: left; }
+  .choice-grid { grid-template-columns: 1fr 1fr; }
+  .connector-pill { position: static; margin: 4px; }
+  .relation-machine { min-height: 420px; padding: 35px 18px 90px; display: block; text-align: center; }
+  .machine-main { margin-bottom: 18px; }
+  .relation-machine::before { display: none; }
+  .relation-output { bottom: 15px; flex-direction: column; gap: 3px; }
+  .compare-lines { grid-template-columns: 1fr; }
+  .bridge-part { flex-direction: column; gap: 5px; }
+  .relative-grid { grid-template-columns: 1fr; }
+  .dual-select { grid-template-columns: 1fr; }
+  .timeline { height: auto; padding: 20px 0; flex-direction: column; align-items: flex-start; gap: 18px; }
+  .time-line { left: 8px; top: 10%; bottom: 10%; width: 2px; height: auto; }
+  .time-point { width: auto; flex-direction: row; gap: 12px; }
+  .time-point::before { margin: 0 5px 0 0; }
+  .idea-constellation { height: 500px; }
+  .idea-constellation span { max-width: 150px; text-align: center; }
+  .authors-strip { grid-template-columns: 1fr; }
+  .author:nth-child(odd), .author:nth-child(even) { padding: 18px 4px; border-right: 0; }
+  .memory-hook { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .work-title, .work-title.reverse { grid-template-columns: 1fr; }
+  .work-title .book-shape, .work-title.reverse .book-shape { order: -1; width: 150px; justify-self: center; }
+  .three-acts, .sertões-triad { grid-template-columns: 1fr; }
+  .act, .triad-item { min-height: 100px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .act-detail { grid-template-columns: 1fr; text-align: center; }
+  .act-symbol { margin: 0 auto; }
+  .perspective-shift { grid-template-columns: 1fr; }
+  .versus-head { display: none; }
+  .versus-row, .versus-row.shared { grid-template-columns: 1fr; }
+  .versus-row > * { border-right: 0; }
+  .versus-row.shared p { grid-column: auto; }
+  .exam-intro { align-items: flex-start; }
+  .exam-score { width: 80px; height: 80px; }
+  .exam-options { grid-template-columns: 1fr; }
+  .exam-result { grid-template-columns: 1fr; text-align: center; }
+  .result-ring { margin: auto; }
+  .flash-item { grid-template-columns: 1fr; gap: 6px; }
+  .flash-item p { grid-column: auto; display: none; }
+  .flash-item.open p { display: block; }
+  footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+/* Mobile study mode: thumb-friendly navigation, denser rhythm and readable data. */
+@media (max-width: 680px) {
+  html { scroll-padding-top: 66px; }
+  body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+  body.focus-mode .mobile-nav { opacity: 1; pointer-events: auto; }
+
+  .topbar { height: 56px; border-bottom-color: rgba(219,225,235,.72); }
+  .brand-mark { width: 36px; height: 36px; }
+  .icon-button { width: 38px; height: 38px; }
+
+  .hero {
+    min-height: auto;
+    padding: 58px 20px 30px;
+    gap: 18px;
+  }
+  .hero h1 { font-size: clamp(3.25rem, 16.5vw, 4.45rem); line-height: .89; }
+  .hero-lead { margin-top: 24px; font-size: 1.04rem; line-height: 1.65; }
+  .hero-actions { margin-top: 26px; gap: 10px; }
+  .hero-actions .button { min-height: 52px; }
+  .session-note { margin-top: 24px; align-items: flex-start; }
+  .hero-visual { width: 230px; height: 230px; aspect-ratio: auto; margin-top: -5px; }
+  .core-word { width: 96px; height: 96px; font-size: 1.25rem; }
+  .floating-word { padding: 8px 11px; font-size: .75rem; }
+
+  .map-section { padding: 62px 20px; }
+  .section-heading { margin-bottom: 30px; }
+  .section-heading.compact h2 { font-size: 2.65rem; }
+  .topic-rail { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .topic-chip {
+    width: 100%; min-height: 48px; padding: 10px 12px;
+    justify-content: flex-start; line-height: 1.2;
+  }
+  .topic-chip:nth-child(5), .topic-chip:nth-child(7) { grid-column: 1 / -1; }
+
+  .domain-section { padding: 72px 18px 40px; }
+  .domain-banner { margin-bottom: 74px; padding: 30px; border-radius: 24px; }
+  .domain-banner h2 { font-size: 2.65rem; }
+  .domain-banner p:last-child { font-size: 1rem; }
+  .lesson { margin-bottom: 82px; }
+  .lesson-intro { margin-bottom: 34px; }
+  .lesson h3 { font-size: clamp(2.35rem, 11vw, 3rem); }
+  .lesson-intro > p:last-child, .work-title > div > p:last-child { font-size: 1.04rem; }
+  .concept-column { padding: 27px 24px; border-radius: 18px; }
+  .sentence-demo { min-height: 76px; margin: 23px 0 15px; }
+  .tip-strip { font-size: .94rem; }
+
+  .activity { margin-top: 32px; padding: 26px 24px; border-radius: 21px; }
+  .activity-head { gap: 12px; margin-bottom: 25px; }
+  .activity-head p { font-size: .95rem; }
+  .click-sentence { min-height: 150px; padding: 18px 14px; gap: 7px 3px; }
+  .click-sentence button { min-height: 42px; padding: 8px 10px; border-color: #34405e; }
+  .choice-row { display: grid; grid-template-columns: 1fr; width: 100%; }
+  .choice-row button, .choice-grid button { width: 100%; min-height: 52px; }
+  .choice-grid { grid-template-columns: 1fr; }
+  .feedback { padding: 16px; line-height: 1.55; }
+
+  .relation-machine { padding: 30px 16px 100px; border-radius: 21px; }
+  .connector-pill { min-height: 44px; margin: 4px 1px; }
+  .relation-output { padding: 13px 14px; }
+
+  .table-wrap { overflow: hidden; border-radius: 17px; }
+  .meaning-table { min-width: 0; display: block; }
+  .meaning-table thead { display: none; }
+  .meaning-table tbody { display: block; }
+  .meaning-table tr {
+    display: grid; grid-template-columns: .9fr 1.1fr; gap: 8px 14px;
+    padding: 20px 17px; border-bottom: 1px solid var(--line);
+  }
+  .meaning-table tr:last-child { border-bottom: 0; }
+  .meaning-table td { display: block; padding: 0; border: 0; font-size: .92rem; }
+  .meaning-table td:first-child { color: var(--ink); font-size: 1rem; }
+  .meaning-table td:nth-child(2) { color: var(--muted); }
+  .meaning-table td:nth-child(3), .meaning-table td:nth-child(4) { grid-column: 1 / -1; }
+  .meaning-table td:nth-child(3)::before { content: "Conectivos · "; color: var(--coral); font-weight: 700; }
+  .meaning-table td:nth-child(4)::before { content: "Exemplo · "; color: var(--blue); font-weight: 700; }
+
+  .comma-switcher { min-height: auto; border-radius: 21px; }
+  .switch-copy, .students-visual { padding: 30px 24px; }
+  .sentence-stage { margin-bottom: 35px; font-size: 1.65rem; }
+  .legend { flex-direction: column; align-items: flex-start; gap: 7px; }
+  .bridge-demo { padding: 30px 22px; border-radius: 21px; }
+  .bridge-result { font-size: 1.55rem; }
+  .relative-grid button { min-height: 74px; }
+
+  .timeline-detail, .triad-detail { font-size: .96rem; }
+  .idea-constellation { height: 440px; border-radius: 22px; }
+  .constellation-center { width: 135px; height: 135px; font-size: 1.4rem; }
+  .memory-hook { padding: 22px; }
+  .book-shape { width: 140px !important; }
+  .act, .triad-item { min-height: 92px; padding: 18px 20px; }
+  .act-detail { padding: 30px 22px; gap: 24px; }
+  .act-symbol { width: 125px; height: 125px; }
+  .landscape { height: 205px; }
+  .theme-equation { gap: 9px; }
+  .theme-equation span { padding: 10px 13px; font-size: .9rem; }
+
+  .exam-section { padding: 78px 18px 110px; }
+  .exam-intro { margin-bottom: 32px; align-items: flex-start; }
+  .exam-intro h2 { font-size: 3.1rem; }
+  .exam-score { width: 74px; height: 74px; }
+  .exam-score span { font-size: 2rem; }
+  .exam-shell { min-height: 0; padding: 25px 20px; border-radius: 21px; }
+  .exam-question { margin: 28px 0 22px; font-size: 1.62rem; }
+  .exam-options button { min-height: 58px; }
+  .exam-feedback { line-height: 1.55; }
+
+  .rapid-review { padding: 78px 20px 100px; }
+  .flash-item { min-height: 72px; padding: 15px 8px; }
+  footer { padding-bottom: 105px; }
+
+  .mobile-nav {
+    position: fixed; z-index: 90; left: 10px; right: 10px; bottom: max(9px, env(safe-area-inset-bottom));
+    height: 66px; padding: 5px 7px; display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid rgba(255,255,255,.13); border-radius: 19px;
+    color: #b9c3d8; background: rgba(9,14,30,.94); backdrop-filter: blur(18px);
+    box-shadow: 0 16px 45px rgba(9,14,30,.32);
+  }
+  .mobile-progress {
+    position: absolute; left: 12px; top: 0; width: 0; height: 2px;
+    border-radius: 99px; background: var(--lime); transition: width .12s linear;
+  }
+  .mobile-nav a {
+    min-width: 0; min-height: 54px; padding: 5px 2px; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    border-radius: 13px; font-size: .68rem; font-weight: 700; line-height: 1;
+  }
+  .mobile-nav a svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linejoin: round; }
+  .mobile-nav a.active { color: var(--ink); background: var(--lime); }
+}
+
+@media (max-width: 390px) {
+  .hero { padding-inline: 17px; }
+  .hero h1 { font-size: 3.25rem; }
+  .topic-rail { grid-template-columns: 1fr; }
+  .topic-chip:nth-child(5), .topic-chip:nth-child(7) { grid-column: auto; }
+  .domain-section { padding-inline: 15px; }
+  .activity { padding-inline: 19px; }
+  .exam-intro { display: grid; grid-template-columns: 1fr auto; }
+  .exam-intro > div:first-child { min-width: 0; }
+  .mobile-nav { left: 7px; right: 7px; }
+  .mobile-nav a { font-size: .64rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+</style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Voltar ao início">
+      <span class="brand-mark">R<span>!</span></span>
+      <span>revisão expressa</span>
+    </a>
+    <nav aria-label="Navegação principal">
+      <a href="#gramatica">Gramática</a>
+      <a href="#literatura">Literatura</a>
+      <a href="#simulado">Simulado</a>
+    </nav>
+    <button class="icon-button" id="focusToggle" aria-label="Ativar modo foco" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> prova final · 2ª série · módulo 6</p>
+        <h1>Entenda a matéria.<br><em>Não decore.</em></h1>
+        <p class="hero-lead">Uma revisão rápida, visual e prática de tudo o que está no roteiro da professora Ione. Explore na ordem que quiser.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#mapa">Começar pela visão geral</a>
+          <button class="button ghost" id="surpriseBtn">Sortear um desafio</button>
+        </div>
+        <div class="session-note">
+          <span class="pulse-dot"></span>
+          <span><strong>Rota sugerida:</strong> entender → testar → corrigir → revisar</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Diagrama animado conectando gramática e literatura">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="core-word">sentido</div>
+        <div class="floating-word word-a">oração</div>
+        <div class="floating-word word-b">contexto</div>
+        <div class="floating-word word-c">Brasil</div>
+        <div class="floating-word word-d">relação</div>
+        <svg class="scribble" viewBox="0 0 300 300" aria-hidden="true"><path d="M38 171C52 67 171 27 244 90c70 61 12 178-76 172C77 257 8 201 38 171Z"/></svg>
+      </div>
+    </section>
+
+    <section class="map-section" id="mapa">
+      <div class="section-heading compact">
+        <p class="kicker">O mapa da prova</p>
+        <h2>Sete alvos. Uma lógica em comum.</h2>
+        <p>Em gramática, você identifica relações entre orações. Em literatura, relações entre obra e Brasil. Clique em qualquer alvo.</p>
+      </div>
+      <div class="topic-rail" role="list">
+        <a href="#periodos" class="topic-chip" role="listitem"><span>01</span> Períodos</a>
+        <a href="#adverbiais" class="topic-chip" role="listitem"><span>02</span> Adverbiais</a>
+        <a href="#adjetivas" class="topic-chip" role="listitem"><span>03</span> Adjetivas</a>
+        <a href="#relativos" class="topic-chip" role="listitem"><span>04</span> Relativos</a>
+        <a href="#premodernismo" class="topic-chip literature" role="listitem"><span>05</span> Pré-Modernismo</a>
+        <a href="#policarpo" class="topic-chip literature" role="listitem"><span>06</span> Policarpo</a>
+        <a href="#sertoes" class="topic-chip literature" role="listitem"><span>07</span> Os Sertões</a>
+      </div>
+    </section>
+
+    <section class="domain-section" id="gramatica">
+      <div class="domain-banner grammar-banner">
+        <span class="domain-number">A</span>
+        <div><p class="kicker">Gramática</p><h2>Leia a arquitetura da frase</h2></div>
+        <p>O segredo é localizar verbos, enxergar conexões e perguntar qual relação de sentido foi criada.</p>
+      </div>
+
+      <article class="lesson" id="periodos">
+        <div class="lesson-intro">
+          <p class="lesson-index">01 · A base</p>
+          <h3>Período simples ou composto?</h3>
+          <p>Conte <strong>orações</strong>, não palavras. Em geral, cada verbo ou locução verbal forma uma oração.</p>
+        </div>
+        <div class="concept-split">
+          <div class="concept-column simple">
+            <span class="mini-label">1 oração</span>
+            <h4>Período simples</h4>
+            <p>Tem apenas um núcleo verbal.</p>
+            <div class="sentence-demo"><span>O aluno</span> <mark>revisou</mark> <span>a matéria.</span></div>
+            <small>1 verbo → 1 oração</small>
+          </div>
+          <div class="divider-or"><span>ou</span></div>
+          <div class="concept-column compound">
+            <span class="mini-label">2+ orações</span>
+            <h4>Período composto</h4>
+            <p>Tem dois ou mais núcleos verbais.</p>
+            <div class="sentence-demo"><span>O aluno</span> <mark>revisou</mark><span>,</span> <mark>entendeu</mark> <span>e</span> <mark>acertou</mark><span>.</span></div>
+            <small>3 verbos → 3 orações</small>
+          </div>
+        </div>
+        <div class="tip-strip"><strong>Atenção:</strong> locução verbal vale como um só núcleo: “<u>vai estudar</u>” = 1 oração.</div>
+
+        <div class="activity sentence-lab" data-activity="period">
+          <div class="activity-head"><div><span class="activity-tag">Laboratório</span><h4>Caça-verbo</h4></div><p>Clique em todos os núcleos verbais. Depois classifique o período.</p></div>
+          <div class="click-sentence" id="verbSentence" aria-label="Frase interativa">
+            <button data-verb="false">Quando</button><button data-verb="false">a</button><button data-verb="false">chuva</button><button data-verb="true">parou</button><span>,</span><button data-verb="false">os</button><button data-verb="false">jogadores</button><button data-verb="true">voltaram</button><button data-verb="false">ao</button><button data-verb="false">campo</button><span>.</span>
+          </div>
+          <div class="choice-row" id="periodChoices">
+            <button data-answer="simples">Período simples</button>
+            <button data-answer="composto">Período composto</button>
+          </div>
+          <div class="feedback" id="periodFeedback" aria-live="polite"></div>
+        </div>
+      </article>
+
+      <article class="lesson" id="adverbiais">
+        <div class="lesson-intro">
+          <p class="lesson-index">02 · Relações de circunstância</p>
+          <h3>Orações subordinadas adverbiais</h3>
+          <p>Funcionam como um <strong>advérbio ampliado</strong>: acrescentam uma circunstância à oração principal. O melhor caminho é perguntar: que ideia essa oração expressa?</p>
+        </div>
+
+        <div class="relation-machine">
+          <div class="machine-main">Eu fui à escola</div>
+          <button class="connector-pill active" data-relation="causal">porque havia prova.</button>
+          <button class="connector-pill" data-relation="temporal">quando o sinal tocou.</button>
+          <button class="connector-pill" data-relation="condicional">se a aula não for cancelada.</button>
+          <button class="connector-pill" data-relation="concessiva">embora estivesse cansado.</button>
+          <div class="relation-output" id="relationOutput"><strong>CAUSA</strong><span>explica o motivo da ação principal.</span></div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="meaning-table">
+            <thead><tr><th>Relação</th><th>Pergunta mental</th><th>Conectivos frequentes</th><th>Exemplo curto</th></tr></thead>
+            <tbody>
+              <tr><td><b>Causal</b></td><td>Por qual motivo?</td><td>porque, como, já que</td><td>Fiquei, <u>porque chovia</u>.</td></tr>
+              <tr><td><b>Comparativa</b></td><td>Comparado a quê?</td><td>como, mais... que</td><td>Corre <u>como um raio corre</u>.</td></tr>
+              <tr><td><b>Concessiva</b></td><td>Apesar de quê?</td><td>embora, ainda que</td><td>Foi, <u>embora chovesse</u>.</td></tr>
+              <tr><td><b>Condicional</b></td><td>Com qual condição?</td><td>se, caso, desde que</td><td>Irei <u>se puder</u>.</td></tr>
+              <tr><td><b>Conformativa</b></td><td>Conforme o quê?</td><td>conforme, segundo</td><td>Fiz <u>como pediu</u>.</td></tr>
+              <tr><td><b>Consecutiva</b></td><td>Com qual resultado?</td><td>tão... que, tanto... que</td><td>Choveu tanto <u>que alagou</u>.</td></tr>
+              <tr><td><b>Final</b></td><td>Com qual finalidade?</td><td>para que, a fim de que</td><td>Estudo <u>para que passe</u>.</td></tr>
+              <tr><td><b>Proporcional</b></td><td>Em que proporção?</td><td>à medida que, quanto mais</td><td><u>Quanto mais leio</u>, mais entendo.</td></tr>
+              <tr><td><b>Temporal</b></td><td>Quando?</td><td>quando, enquanto, assim que</td><td>Saí <u>quando tocou</u>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="activity classify-lab">
+          <div class="activity-head"><div><span class="activity-tag">Desafio relâmpago</span><h4>Nomeie a relação</h4></div><p id="advCounter">1 de 5</p></div>
+          <div class="prompt-box" id="advPrompt"></div>
+          <div class="choice-grid" id="advChoices"></div>
+          <div class="feedback" id="advFeedback" aria-live="polite"></div>
+          <button class="text-button hidden" id="nextAdv">Próxima frase</button>
+        </div>
+      </article>
+
+      <article class="lesson" id="adjetivas">
+        <div class="lesson-intro">
+          <p class="lesson-index">03 · Caracterização</p>
+          <h3>Orações subordinadas adjetivas</h3>
+          <p>Elas caracterizam um nome anterior, chamado <strong>antecedente</strong>, e normalmente começam por pronome relativo.</p>
+        </div>
+        <div class="comma-switcher">
+          <div class="switch-copy">
+            <span class="mini-label">A vírgula muda tudo</span>
+            <h4 id="commaTitle">Restritiva: seleciona um grupo</h4>
+            <p id="commaExplanation">Somente os alunos que estudaram passaram. Pode haver alunos que não estudaram.</p>
+            <button class="toggle" id="commaToggle" aria-pressed="false"><span></span><b>Adicionar vírgulas</b></button>
+          </div>
+          <div class="students-visual" id="studentsVisual" aria-label="Visualização do efeito das vírgulas">
+            <div class="sentence-stage">Os alunos <mark id="commaClause">que estudaram</mark> passaram.</div>
+            <div class="people-row">
+              <span class="person studied" title="estudou">A</span><span class="person studied" title="estudou">B</span><span class="person" title="não estudou">C</span><span class="person studied" title="estudou">D</span><span class="person" title="não estudou">E</span>
+            </div>
+            <div class="legend"><span><i class="dot pass"></i> passam</span><span><i class="dot no-pass"></i> ficam fora da afirmação</span></div>
+          </div>
+        </div>
+        <div class="compare-lines">
+          <div><strong>Restritiva</strong><span>sem vírgulas</span><p>Limita o sentido do antecedente. Informação indispensável.</p></div>
+          <div><strong>Explicativa</strong><span>com vírgulas</span><p>Acrescenta uma informação sobre todo o antecedente.</p></div>
+        </div>
+        <div class="activity mini-quiz" data-question="adjective">
+          <div class="activity-head"><div><span class="activity-tag">Teste de precisão</span><h4>Qual é a classificação?</h4></div></div>
+          <div class="prompt-box">“Machado de Assis, <u>que fundou a ABL</u>, é um grande escritor.”</div>
+          <div class="choice-row quiz-options"><button data-value="restritiva">Restritiva</button><button data-value="explicativa">Explicativa</button></div>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+      </article>
+
+      <article class="lesson" id="relativos">
+        <div class="lesson-intro">
+          <p class="lesson-index">04 · A ponte</p>
+          <h3>Pronomes relativos e antecedentes</h3>
+          <p>O pronome relativo evita repetição e liga duas ideias. Para achar o antecedente, pergunte: <strong>“esse pronome retoma qual palavra?”</strong></p>
+        </div>
+        <div class="bridge-demo">
+          <div class="bridge-part"><span>Conheci a escritora.</span><span>+ Li o livro da escritora.</span></div>
+          <div class="bridge-arrow"><span>evite repetir</span></div>
+          <div class="bridge-result">Conheci a <button class="antecedent">escritora</button> <button class="relative">cujo</button> livro li.</div>
+          <p><b>“cujo”</b> liga a escritora ao livro e expressa posse. Não use artigo depois: <s>cujo o livro</s>.</p>
+        </div>
+        <div class="relative-grid">
+          <button data-rel="que"><b>que</b><span>pessoa ou coisa</span></button>
+          <button data-rel="quem"><b>quem</b><span>pessoa; costuma vir com preposição</span></button>
+          <button data-rel="onde"><b>onde</b><span>lugar físico</span></button>
+          <button data-rel="cujo"><b>cujo(a)</b><span>posse; concorda com o que vem depois</span></button>
+          <button data-rel="qual"><b>o qual</b><span>varia e ajuda a desfazer ambiguidades</span></button>
+          <button data-rel="quanto"><b>quanto</b><span>após tudo, tanto, todos</span></button>
+        </div>
+        <div class="relative-detail" id="relativeDetail"><p><strong>QUE</strong> é o coringa: “O livro <u>que</u> li era ótimo.” Retoma “livro”.</p></div>
+
+        <div class="activity antecedent-lab">
+          <div class="activity-head"><div><span class="activity-tag">Detetive do antecedente</span><h4>Monte a ligação correta</h4></div><p>Escolha o pronome e depois o antecedente.</p></div>
+          <div class="prompt-box">“Visitamos a cidade ___ nasceu o poeta.”</div>
+          <div class="dual-select">
+            <label>Pronome<select id="relativeSelect"><option value="">escolha</option><option value="que">que</option><option value="onde">onde</option><option value="cuja">cuja</option></select></label>
+            <label>Antecedente<select id="antecedentSelect"><option value="">escolha</option><option value="visitamos">visitamos</option><option value="cidade">cidade</option><option value="poeta">poeta</option></select></label>
+            <button class="button small" id="checkRelative">Conferir</button>
+          </div>
+          <div class="feedback" id="relativeFeedback" aria-live="polite"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="domain-section literature-domain" id="literatura">
+      <div class="domain-banner literature-banner">
+        <span class="domain-number">B</span>
+        <div><p class="kicker">Literatura</p><h2>Veja o Brasil fora do cartão-postal</h2></div>
+        <p>O Pré‑Modernismo expõe conflitos, desigualdades e regiões que a literatura oficial costumava deixar à margem.</p>
+      </div>
+
+      <article class="lesson" id="premodernismo">
+        <div class="lesson-intro">
+          <p class="lesson-index">05 · Período de transição</p>
+          <h3>Pré‑Modernismo no Brasil</h3>
+          <p>Entre <strong>1902 e 1922</strong>, não houve uma escola literária com manifesto único. Houve uma ponte: formas ainda tradicionais passaram a retratar um Brasil real, contraditório e pouco idealizado.</p>
+        </div>
+        <div class="timeline" aria-label="Linha do tempo do Pré-Modernismo">
+          <div class="time-line"></div>
+          <button class="time-point active" data-year="1902"><span>1902</span><b>Os Sertões</b></button>
+          <button class="time-point" data-year="1911"><span>1911</span><b>Triste Fim...</b></button>
+          <button class="time-point" data-year="1918"><span>1918</span><b>Urupês</b></button>
+          <button class="time-point" data-year="1922"><span>1922</span><b>Semana de Arte Moderna</b></button>
+        </div>
+        <div class="timeline-detail" id="timelineDetail"><strong>1902 · Euclides da Cunha</strong><p><em>Os Sertões</em> inaugura um olhar documental e literário sobre Canudos, o sertanejo e o conflito entre litoral e interior.</p></div>
+
+        <div class="idea-constellation">
+          <div class="constellation-center">Brasil real</div>
+          <span style="--x:8%;--y:16%">denúncia social</span>
+          <span style="--x:68%;--y:9%">regionalismo</span>
+          <span style="--x:4%;--y:73%">linguagem mais direta</span>
+          <span style="--x:71%;--y:76%">personagens marginalizados</span>
+          <span style="--x:37%;--y:88%">contrastes nacionais</span>
+        </div>
+        <p class="reading-key"><strong>Chave de leitura:</strong> se o texto revela sertão, subúrbio, preconceito, desigualdade ou crítica ao poder, ele dialoga com o projeto pré‑modernista de mostrar o país que o discurso oficial escondia.</p>
+
+        <div class="authors-strip">
+          <div class="author active"><span>EC</span><div><b>Euclides da Cunha</b><small>sertão, Canudos, ciência + literatura</small></div></div>
+          <div class="author"><span>LB</span><div><b>Lima Barreto</b><small>subúrbio, racismo, burocracia, crítica social</small></div></div>
+          <div class="author"><span>ML</span><div><b>Monteiro Lobato</b><small>interior paulista, caboclo, atraso rural</small></div></div>
+          <div class="author"><span>AG</span><div><b>Augusto dos Anjos</b><small>angústia, morte, vocabulário científico</small></div></div>
+        </div>
+        <div class="memory-hook"><span>4 nomes para lembrar</span><strong>Euclides olha o sertão · Lima olha o subúrbio · Lobato olha o campo · Augusto olha o interior humano.</strong></div>
+      </article>
+
+      <article class="lesson work-study" id="policarpo">
+        <div class="work-title">
+          <div><p class="lesson-index">06 · Lima Barreto</p><h3>Triste Fim de Policarpo Quaresma</h3><p>Um nacionalista idealista tenta melhorar o Brasil e descobre a distância brutal entre o país sonhado e o país governado.</p></div>
+          <div class="book-shape policarpo-cover"><span>1911</span><strong>TRISTE<br>FIM</strong><small>de Policarpo Quaresma</small></div>
+        </div>
+        <div class="three-acts">
+          <button class="act active" data-act="1"><span>1</span><b>Cultura</b><small>tupi como língua oficial</small></button>
+          <button class="act" data-act="2"><span>2</span><b>Terra</b><small>o projeto agrícola</small></button>
+          <button class="act" data-act="3"><span>3</span><b>Política</b><small>apoio a Floriano</small></button>
+        </div>
+        <div class="act-detail" id="actDetail"><div class="act-symbol">TUPI</div><div><strong>O primeiro choque</strong><p>Policarpo propõe o tupi como língua oficial, acreditando valorizar as raízes nacionais. A burocracia e a sociedade o tratam como louco. O episódio critica o nacionalismo ingênuo e a intolerância ao diferente.</p></div></div>
+        <div class="theme-equation"><span>patriotismo idealizado</span><b>+</b><span>realidade corrupta</span><b>=</b><span class="result">desilusão trágica</span></div>
+        <div class="interpretation-box"><strong>Não caia na leitura rasa</strong><p>A obra não diz que amar o país é ridículo. Ela critica um patriotismo cego, incapaz de enxergar desigualdade, autoritarismo e burocracia. Policarpo é ao mesmo tempo cômico em seus projetos e trágico em sua honestidade.</p></div>
+      </article>
+
+      <article class="lesson work-study" id="sertoes">
+        <div class="work-title reverse">
+          <div class="book-shape sertoes-cover"><span>1902</span><strong>OS<br>SERTÕES</strong><small>Euclides da Cunha</small></div>
+          <div><p class="lesson-index">07 · Euclides da Cunha</p><h3>Os Sertões</h3><p>Obra híbrida que investiga a Guerra de Canudos e denuncia como a República destruiu uma população que não compreendia.</p></div>
+        </div>
+        <div class="sertões-triad">
+          <button class="triad-item active" data-triad="terra"><span>I</span><b>A Terra</b><small>o ambiente sertanejo</small></button>
+          <button class="triad-item" data-triad="homem"><span>II</span><b>O Homem</b><small>o sertanejo e Antônio Conselheiro</small></button>
+          <button class="triad-item" data-triad="luta"><span>III</span><b>A Luta</b><small>a Guerra de Canudos</small></button>
+        </div>
+        <div class="landscape" id="sertõesLandscape" aria-hidden="true"><div class="sun"></div><div class="ridge back"></div><div class="ridge front"></div><div class="cactus">Y</div></div>
+        <div class="triad-detail" id="triadDetail"><strong>A Terra</strong><p>O autor descreve relevo, clima e vegetação da caatinga. Usa ideias científicas do seu tempo, algumas hoje superadas, para explicar como o ambiente moldaria a vida no sertão.</p></div>
+        <div class="perspective-shift">
+          <div><small>Euclides chegou pensando</small><strong>“Canudos ameaça a República.”</strong></div>
+          <div class="shift-arrow">reviu<br>a visão</div>
+          <div><small>Depois dos fatos, denunciou</small><strong>“Foi um crime contra brasileiros abandonados.”</strong></div>
+        </div>
+        <div class="interpretation-box coral"><strong>Assunto central</strong><p>Canudos não é só uma batalha. É o choque entre dois Brasis: o litoral “civilizado”, que desconhece o interior, e o sertão pobre, resistente e excluído. A obra mistura relato histórico, análise social, ciência e linguagem literária.</p></div>
+      </article>
+
+      <article class="lesson compare-works">
+        <div class="lesson-intro"><p class="lesson-index">Síntese</p><h3>Duas obras, o mesmo país partido</h3></div>
+        <div class="versus-grid">
+          <div class="versus-head"><span></span><b>Policarpo Quaresma</b><b>Os Sertões</b></div>
+          <div class="versus-row"><span>Espaço</span><p>Rio de Janeiro e interior próximo</p><p>Sertão baiano</p></div>
+          <div class="versus-row"><span>Foco</span><p>um indivíduo idealista</p><p>uma comunidade e uma guerra</p></div>
+          <div class="versus-row"><span>Crítica</span><p>burocracia, autoritarismo, nacionalismo cego</p><p>abandono, preconceito, violência do Estado</p></div>
+          <div class="versus-row shared"><span>Em comum</span><p>revelam a distância entre o Brasil oficial e o Brasil real</p></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="exam-section" id="simulado">
+      <div class="exam-intro">
+        <div><p class="kicker">Fechamento</p><h2>Simulado adaptativo</h2><p>Dez questões misturam identificação e interpretação. A correção aparece na hora, sempre com o caminho do raciocínio.</p></div>
+        <div class="exam-score"><span id="scoreValue">0</span><small>acertos</small></div>
+      </div>
+      <div class="exam-shell">
+        <div class="exam-progress"><span id="examProgress"></span></div>
+        <div class="exam-meta"><span id="examNumber">Questão 1 de 10</span><span id="examTopic">Gramática</span></div>
+        <div class="exam-question" id="examQuestion"></div>
+        <div class="exam-options" id="examOptions"></div>
+        <div class="exam-feedback" id="examFeedback" aria-live="polite"></div>
+        <button class="button primary hidden" id="nextExam">Próxima questão</button>
+      </div>
+      <div class="exam-result hidden" id="examResult">
+        <div class="result-ring"><span id="finalScore">0</span><small>/10</small></div>
+        <div><p class="kicker">Resultado</p><h3 id="resultTitle">Boa base!</h3><p id="resultText"></p><button class="button ghost" id="restartExam">Refazer com nova ordem</button></div>
+      </div>
+    </section>
+
+    <section class="rapid-review" id="revisao-final">
+      <div class="section-heading compact"><p class="kicker">Antes de fechar</p><h2>Revisão em 60 segundos</h2><p>Clique para revelar o essencial de cada ponto.</p></div>
+      <div class="flash-list">
+        <button class="flash-item"><span>Período</span><b>Conte núcleos verbais</b><p>1 oração = simples; 2 ou mais = composto.</p></button>
+        <button class="flash-item"><span>Adverbial</span><b>Pergunte pela circunstância</b><p>Motivo, tempo, condição, finalidade, consequência etc.</p></button>
+        <button class="flash-item"><span>Adjetiva</span><b>Olhe as vírgulas</b><p>Sem vírgula restringe; com vírgula explica.</p></button>
+        <button class="flash-item"><span>Relativo</span><b>Procure o antecedente</b><p>O pronome retoma um nome e conecta orações.</p></button>
+        <button class="flash-item"><span>Pré‑Modernismo</span><b>1902–1922, Brasil real</b><p>Transição, denúncia, regionalismo e marginalizados.</p></button>
+        <button class="flash-item"><span>Policarpo</span><b>Ideal × real</b><p>O patriotismo ingênuo se desfaz diante do autoritarismo.</p></button>
+        <button class="flash-item"><span>Sertões</span><b>Terra · Homem · Luta</b><p>Canudos revela o choque entre o Brasil oficial e o interior.</p></button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-nav" aria-label="Atalhos de estudo">
+    <span class="mobile-progress" id="mobileProgress" aria-hidden="true"></span>
+    <a href="#inicio" data-mobile-nav="inicio" class="active">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4Z"/></svg>
+      <span>Início</span>
+    </a>
+    <a href="#gramatica" data-mobile-nav="gramatica">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h5a4 4 0 0 1 4 4v12a4 4 0 0 0-4-4H5Zm14 0h-5v16a4 4 0 0 1 4-4h1Z"/></svg>
+      <span>Gramática</span>
+    </a>
+    <a href="#literatura" data-mobile-nav="literatura">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h11a2 2 0 0 1 2 2v16H7a3 3 0 0 1-3-3V5a2 2 0 0 1 2-2Zm1 13h12M8 7h7"/></svg>
+      <span>Literatura</span>
+    </a>
+    <a href="#simulado" data-mobile-nav="simulado">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v16H7zM9.5 8h5M9.5 12h5M9.5 16h3"/></svg>
+      <span>Simulado</span>
+    </a>
+  </nav>
+
+  <footer>
+    <div><strong>Revisão Expressa</strong><span>Feita para uma sessão de estudo focada.</span></div>
+    <a href="#inicio">Voltar ao início</a>
+  </footer>
+
+  <div class="challenge-modal" id="challengeModal" role="dialog" aria-modal="true" aria-labelledby="challengeTitle" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card"><button class="modal-close" data-close-modal aria-label="Fechar">×</button><span class="activity-tag">Desafio surpresa</span><h3 id="challengeTitle"></h3><p id="challengeText"></p><a class="button primary" id="challengeLink" href="#">Ir para o assunto</a></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script>
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+// Motion that teaches hierarchy without blocking interaction.
+if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  gsap.from('.hero-copy > *', { y: 24, opacity: 0, duration: .75, stagger: .1, ease: 'power3.out' });
+  gsap.from('.hero-visual', { scale: .88, opacity: 0, duration: 1.1, ease: 'expo.out' });
+  gsap.to('.orbit-one', { rotation: 360, duration: 28, repeat: -1, ease: 'none' });
+  gsap.to('.orbit-two', { rotation: -360, duration: 21, repeat: -1, ease: 'none' });
+  $$('.floating-word').forEach((el, i) => gsap.to(el, { y: i % 2 ? 9 : -9, duration: 2.4 + i * .3, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
+
+  const reveal = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        gsap.fromTo(entry.target, { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: .7, ease: 'power2.out' });
+        reveal.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .08 });
+  $$('.lesson-intro, .activity, .work-title, .domain-banner').forEach(el => reveal.observe(el));
+}
+
+if (window.anime && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  anime({ targets: '.scribble path', strokeDashoffset: [anime.setDashoffset, 0], duration: 2400, easing: 'easeInOutSine' });
+}
+
+// Focus mode keeps only the lesson under the user's attention fully visible.
+const focusToggle = $('#focusToggle');
+focusToggle.addEventListener('click', () => {
+  const active = !document.body.classList.contains('focus-mode');
+  document.body.classList.toggle('focus-mode', active);
+  focusToggle.setAttribute('aria-pressed', String(active));
+  focusToggle.setAttribute('aria-label', active ? 'Desativar modo foco' : 'Ativar modo foco');
+});
+const focusObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => entry.target.classList.toggle('in-view', entry.isIntersecting));
+}, { rootMargin: '-20% 0px -45%' });
+$$('.lesson').forEach(el => focusObserver.observe(el));
+
+// Period lab
+const verbButtons = $$('#verbSentence button');
+verbButtons.forEach(button => button.addEventListener('click', () => {
+  button.classList.toggle('selected');
+  button.classList.remove('wrong-pick');
+}));
+
+$('#periodChoices').addEventListener('click', event => {
+  const button = event.target.closest('button');
+  if (!button) return;
+  const chosenVerbs = verbButtons.filter(b => b.classList.contains('selected'));
+  const correctVerbs = verbButtons.filter(b => b.dataset.verb === 'true');
+  const verbsRight = chosenVerbs.length === correctVerbs.length && chosenVerbs.every(b => b.dataset.verb === 'true');
+  const classRight = button.dataset.answer === 'composto';
+  $$('#periodChoices button').forEach(b => b.classList.remove('correct', 'wrong'));
+  button.classList.add(classRight && verbsRight ? 'correct' : 'wrong');
+  if (!classRight) $('#periodChoices [data-answer="composto"]').classList.add('correct');
+  chosenVerbs.filter(b => b.dataset.verb !== 'true').forEach(b => b.classList.add('wrong-pick'));
+  correctVerbs.forEach(b => b.classList.add('selected'));
+  const feedback = $('#periodFeedback');
+  feedback.className = `feedback show ${classRight && verbsRight ? '' : 'error'}`;
+  feedback.innerHTML = classRight && verbsRight
+    ? '<strong>Perfeito.</strong> “parou” e “voltaram” são dois núcleos verbais: há duas orações, portanto o período é composto.'
+    : '<strong>Reconte pelos verbos.</strong> Os núcleos são “parou” e “voltaram”. “Quando” apenas conecta as ideias. Dois núcleos = duas orações = período composto.';
+});
+
+// Adverbial relation explorer
+const relationData = {
+  causal: ['CAUSA', 'explica o motivo da ação principal.'],
+  temporal: ['TEMPO', 'situa quando a ação principal acontece.'],
+  condicional: ['CONDIÇÃO', 'apresenta o requisito para a ação acontecer.'],
+  concessiva: ['CONCESSÃO', 'mostra um obstáculo que não impede a ação.']
+};
+$$('.connector-pill').forEach(button => button.addEventListener('click', () => {
+  $$('.connector-pill').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  const [title, text] = relationData[button.dataset.relation];
+  $('#relationOutput').innerHTML = `<strong>${title}</strong><span>${text}</span>`;
+  if (window.anime) anime({ targets: '#relationOutput', scale: [.96, 1], opacity: [.4, 1], duration: 350, easing: 'easeOutQuad' });
+}));
+
+const advQuestions = [
+  { text: '“<u>Embora estivesse nervosa</u>, ela apresentou o trabalho.”', answer: 'Concessiva', choices: ['Causal', 'Concessiva', 'Temporal'], why: '“Embora” introduz um obstáculo que não impediu a apresentação. A pergunta mental é: apesar de quê?' },
+  { text: '“Estudei muito <u>para que eu entendesse o conteúdo</u>.”', answer: 'Final', choices: ['Final', 'Consecutiva', 'Comparativa'], why: '“Para que” apresenta a finalidade do estudo, isto é, seu objetivo.' },
+  { text: '“<u>À medida que praticava</u>, ganhava confiança.”', answer: 'Proporcional', choices: ['Temporal', 'Proporcional', 'Conformativa'], why: 'As duas mudanças crescem juntas: mais prática, mais confiança. Isso é proporção.' },
+  { text: '“O texto era tão claro <u>que todos compreenderam</u>.”', answer: 'Consecutiva', choices: ['Causal', 'Consecutiva', 'Condicional'], why: 'A estrutura “tão... que” introduz o resultado da clareza: todos compreenderam.' },
+  { text: '“<u>Se você localizar o verbo</u>, achará a oração.”', answer: 'Condicional', choices: ['Condicional', 'Concessiva', 'Causal'], why: 'Localizar o verbo é a condição para achar a oração. O conectivo “se” ajuda a confirmar.' }
+];
+let advIndex = 0;
+function renderAdv() {
+  const q = advQuestions[advIndex];
+  $('#advCounter').textContent = `${advIndex + 1} de ${advQuestions.length}`;
+  $('#advPrompt').innerHTML = q.text;
+  $('#advChoices').innerHTML = q.choices.map(c => `<button data-choice="${c}">${c}</button>`).join('');
+  $('#advFeedback').className = 'feedback';
+  $('#nextAdv').classList.add('hidden');
+}
+$('#advChoices').addEventListener('click', event => {
+  const button = event.target.closest('button');
+  if (!button || button.disabled) return;
+  const q = advQuestions[advIndex];
+  const right = button.dataset.choice === q.answer;
+  $$('#advChoices button').forEach(b => { b.disabled = true; if (b.dataset.choice === q.answer) b.classList.add('correct'); });
+  if (!right) button.classList.add('wrong');
+  const feedback = $('#advFeedback');
+  feedback.className = `feedback show ${right ? '' : 'error'}`;
+  feedback.innerHTML = `<strong>${right ? 'Acertou.' : 'Quase.'}</strong> ${q.why}`;
+  if (advIndex < advQuestions.length - 1) $('#nextAdv').classList.remove('hidden');
+  else $('#nextAdv').textContent = 'Recomeçar desafio';
+  if (advIndex === advQuestions.length - 1) $('#nextAdv').classList.remove('hidden');
+});
+$('#nextAdv').addEventListener('click', () => { advIndex = (advIndex + 1) % advQuestions.length; $('#nextAdv').textContent = 'Próxima frase'; renderAdv(); });
+renderAdv();
+
+// Adjective clause comma switch
+$('#commaToggle').addEventListener('click', event => {
+  const button = event.currentTarget;
+  const on = button.getAttribute('aria-pressed') !== 'true';
+  button.setAttribute('aria-pressed', String(on));
+  $('#studentsVisual').classList.toggle('explanatory', on);
+  $('#commaTitle').textContent = on ? 'Explicativa: comenta o grupo inteiro' : 'Restritiva: seleciona um grupo';
+  $('#commaExplanation').textContent = on
+    ? 'Todos os alunos estudaram e todos passaram. A oração apenas acrescenta essa informação.'
+    : 'Somente os alunos que estudaram passaram. Pode haver alunos que não estudaram.';
+  $('#commaClause').textContent = on ? ', que estudaram,' : 'que estudaram';
+  if (window.gsap) gsap.fromTo('.person', { y: 5 }, { y: on ? -8 : 0, duration: .35, stagger: .05, ease: 'back.out(2)' });
+});
+
+$$('.mini-quiz .quiz-options button').forEach(button => button.addEventListener('click', () => {
+  const activity = button.closest('.mini-quiz');
+  const right = button.dataset.value === 'explicativa';
+  $$('.quiz-options button', activity).forEach(b => { b.disabled = true; if (b.dataset.value === 'explicativa') b.classList.add('correct'); });
+  if (!right) button.classList.add('wrong');
+  const feedback = $('.feedback', activity);
+  feedback.className = `feedback show ${right ? '' : 'error'}`;
+  feedback.innerHTML = `<strong>${right ? 'Isso.' : 'Observe a pontuação.'}</strong> A oração está isolada por vírgulas e acrescenta uma informação sobre Machado de Assis; ela não seleciona “qual” Machado. Logo, é explicativa.`;
+}));
+
+// Relative pronoun reference cards and lab
+const relativeData = {
+  que: '<strong>QUE</strong> é o coringa: “O livro <u>que</u> li era ótimo.” Retoma “livro”.',
+  quem: '<strong>QUEM</strong> retoma pessoa e geralmente vem após preposição: “A amiga <u>com quem</u> conversei”.',
+  onde: '<strong>ONDE</strong> retoma lugar físico: “A cidade <u>onde</u> nasci”. Para situação abstrata, prefira “em que”.',
+  cujo: '<strong>CUJO</strong> indica posse: “A autora <u>cujo livro</u> li”. Concorda com “livro”, não com “autora”.',
+  qual: '<strong>O QUAL</strong> varia em gênero e número e pode eliminar ambiguidade: “as regras <u>pelas quais</u> me guiei”.',
+  quanto: '<strong>QUANTO</strong> costuma vir depois de “tudo”, “todos” ou “tanto”: “Fez tudo <u>quanto</u> podia”.'
+};
+$$('.relative-grid button').forEach(button => button.addEventListener('click', () => {
+  $$('.relative-grid button').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  $('#relativeDetail').innerHTML = `<p>${relativeData[button.dataset.rel]}</p>`;
+}));
+$('#checkRelative').addEventListener('click', () => {
+  const rel = $('#relativeSelect').value;
+  const ant = $('#antecedentSelect').value;
+  const right = rel === 'onde' && ant === 'cidade';
+  const feedback = $('#relativeFeedback');
+  feedback.className = `feedback show ${right ? '' : 'error'}`;
+  feedback.innerHTML = right
+    ? '<strong>Ligação perfeita.</strong> “onde” retoma “cidade”, um lugar físico: Visitamos a cidade onde nasceu o poeta.'
+    : '<strong>Siga o sentido.</strong> O espaço em que alguém nasce é a “cidade”; como o antecedente é lugar físico, o pronome adequado é “onde”.';
+});
+
+// Literature timeline
+const timelineData = {
+  1902: ['1902 · Euclides da Cunha', '<em>Os Sertões</em> inaugura um olhar documental e literário sobre Canudos, o sertanejo e o conflito entre litoral e interior.'],
+  1911: ['1911 · Lima Barreto', '<em>Triste Fim de Policarpo Quaresma</em> começa a circular em folhetins e desmonta o nacionalismo idealizado.'],
+  1918: ['1918 · Monteiro Lobato', '<em>Urupês</em> projeta o autor e põe o interior paulista e o caboclo no centro do debate — embora com visão marcada por preconceitos da época.'],
+  1922: ['1922 · Virada modernista', 'A Semana de Arte Moderna simboliza o início do Modernismo. Por isso, 1922 funciona como marco final do período de transição.']
+};
+$$('.time-point').forEach(button => button.addEventListener('click', () => {
+  $$('.time-point').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  const [title, text] = timelineData[button.dataset.year];
+  $('#timelineDetail').innerHTML = `<strong>${title}</strong><p>${text}</p>`;
+}));
+
+// Policarpo in three acts
+const actData = {
+  1: ['TUPI', 'O primeiro choque', 'Policarpo propõe o tupi como língua oficial, acreditando valorizar as raízes nacionais. A burocracia e a sociedade o tratam como louco. O episódio critica o nacionalismo ingênuo e a intolerância ao diferente.'],
+  2: ['🌱', 'A experiência no campo', 'No sítio Sossego, ele acredita na fertilidade e abundância do Brasil. Saúvas, dificuldades de cultivo e exploração política mostram que o “celeiro do mundo” idealizado não corresponde à realidade.'],
+  3: ['⚖', 'A ruptura política', 'Policarpo apoia Floriano Peixoto, esperando ordem e justiça. Ao denunciar execuções arbitrárias, torna-se vítima do mesmo poder que defendeu. Seu patriotismo amadurece tarde demais em consciência crítica.']
+};
+$$('.act').forEach(button => button.addEventListener('click', () => {
+  $$('.act').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  const [symbol, title, text] = actData[button.dataset.act];
+  $('#actDetail').innerHTML = `<div class="act-symbol">${symbol}</div><div><strong>${title}</strong><p>${text}</p></div>`;
+}));
+
+// Os Sertões triad
+const triadData = {
+  terra: ['A Terra', 'O autor descreve relevo, clima e vegetação da caatinga. Usa ideias científicas do seu tempo, algumas hoje superadas, para explicar como o ambiente moldaria a vida no sertão.'],
+  homem: ['O Homem', 'Analisa o sertanejo, a formação da população e Antônio Conselheiro. Apesar de teorias deterministas datadas, o sertanejo ganha força épica: resistente, adaptado e incompreendido.'],
+  luta: ['A Luta', 'Narra as expedições militares contra Canudos. O arraial resiste até ser destruído em 1897. A violência evidencia o despreparo e a crueldade do Estado republicano.']
+};
+$$('.triad-item').forEach(button => button.addEventListener('click', () => {
+  $$('.triad-item').forEach(b => b.classList.remove('active'));
+  button.classList.add('active');
+  const [title, text] = triadData[button.dataset.triad];
+  $('#triadDetail').innerHTML = `<strong>${title}</strong><p>${text}</p>`;
+  const colors = { terra: ['#ffdf9e', '#c57c50'], homem: ['#e8c084', '#9b6245'], luta: ['#e9a184', '#873b35'] }[button.dataset.triad];
+  $('#sertõesLandscape').style.background = colors[0];
+  $('.ridge.back').style.background = colors[1];
+}));
+
+// Surprise challenge modal
+const surprises = [
+  { title: 'Caça-verbo', text: 'Na frase “Quando chegou, todos saíram”, quantos núcleos verbais existem?', href: '#periodos' },
+  { title: 'A vírgula decide', text: 'Compare “os alunos que estudaram” e “os alunos, que estudaram,”. Quem passa em cada versão?', href: '#adjetivas' },
+  { title: 'Brasil real', text: 'Explique em uma frase o que une Policarpo Quaresma e Canudos.', href: '#literatura' },
+  { title: 'Relação de sentido', text: 'Em “Ainda que chova, irei”, o obstáculo impede a ação?', href: '#adverbiais' }
+];
+const modal = $('#challengeModal');
+$('#surpriseBtn').addEventListener('click', () => {
+  const item = surprises[Math.floor(Math.random() * surprises.length)];
+  $('#challengeTitle').textContent = item.title;
+  $('#challengeText').textContent = item.text;
+  $('#challengeLink').href = item.href;
+  modal.hidden = false;
+  requestAnimationFrame(() => { if (window.gsap) gsap.from('.modal-card', { y: 25, scale: .97, opacity: 0, duration: .35 }); });
+});
+$$('[data-close-modal]').forEach(el => el.addEventListener('click', () => { modal.hidden = true; }));
+$('#challengeLink').addEventListener('click', () => { modal.hidden = true; });
+document.addEventListener('keydown', event => { if (event.key === 'Escape') modal.hidden = true; });
+
+// Full mixed exam
+const examBank = [
+  { topic: 'Períodos', q: 'Em “O sinal tocou e os alunos saíram”, o período é...', options: ['simples, pois há um sujeito', 'composto, pois há dois verbos', 'simples, pois há uma conjunção', 'composto, pois há duas vírgulas'], a: 1, why: 'Conte os núcleos verbais: “tocou” e “saíram”. São duas orações, então o período é composto. Quantidade de sujeitos ou de vírgulas não define isso.' },
+  { topic: 'Períodos', q: 'Em “Os alunos <u>devem revisar</u> hoje”, quantas orações há?', options: ['Uma', 'Duas', 'Três', 'Não há oração'], a: 0, why: '“Devem revisar” é uma locução verbal: os dois verbos funcionam juntos como um único núcleo. Portanto, há uma oração.' },
+  { topic: 'Adverbiais', q: '“<u>Como estava cansado</u>, dormiu cedo.” A oração destacada é...', options: ['comparativa', 'causal', 'conformativa', 'final'], a: 1, why: 'Aqui “como” equivale a “porque” e explica o motivo de dormir cedo. Trocar pelo conectivo equivalente é um bom teste.' },
+  { topic: 'Adverbiais', q: '“Estudou tanto <u>que acertou tudo</u>.” Que relação aparece?', options: ['causa', 'tempo', 'consequência', 'condição'], a: 2, why: 'A estrutura “tanto... que” apresenta um resultado: acertar tudo é consequência de estudar tanto.' },
+  { topic: 'Adjetivas', q: '“Os livros <u>que estão na mesa</u> são meus.” A oração destacada é...', options: ['adjetiva restritiva', 'adjetiva explicativa', 'adverbial temporal', 'adverbial causal'], a: 0, why: 'Sem vírgulas, a oração seleciona quais livros são meus: apenas os que estão na mesa. Por isso é restritiva.' },
+  { topic: 'Adjetivas', q: 'Qual versão afirma que todos os estudantes se dedicaram?', options: ['Os estudantes que se dedicaram passaram.', 'Os estudantes, que se dedicaram, passaram.', 'Que se dedicaram os estudantes passaram.', 'Os estudantes passaram que se dedicaram.'], a: 1, why: 'Com vírgulas, “que se dedicaram” é explicativa e se refere ao grupo inteiro. Sem vírgulas, apenas uma parte do grupo é selecionada.' },
+  { topic: 'Pronomes relativos', q: 'Em “O autor <u>cuja obra</u> lemos”, “cuja” expressa...', options: ['lugar', 'tempo', 'posse', 'comparação'], a: 2, why: 'A obra pertence ao autor. “Cuja” cria essa relação de posse e concorda com o termo posterior: obra.' },
+  { topic: 'Pronomes relativos', q: 'Complete: “Esta é a escola ___ estudei.”', options: ['cujo', 'onde', 'quem', 'quanto'], a: 1, why: '“Escola” é um lugar físico e funciona como antecedente. “Onde” equivale a “em que”: a escola em que estudei.' },
+  { topic: 'Pré‑Modernismo', q: 'Por que o Pré‑Modernismo é chamado de período de transição?', options: ['Porque abandonou totalmente as formas tradicionais', 'Porque não produziu literatura', 'Porque combinou traços antigos com novos temas e crítica social', 'Porque ocorreu entre duas guerras mundiais'], a: 2, why: 'Os autores não formaram uma escola única: conservaram recursos anteriores, mas anteciparam o Modernismo ao expor o Brasil real e seus conflitos.' },
+  { topic: 'Pré‑Modernismo', q: 'Qual conjunto reúne quatro autores representativos do período?', options: ['Euclides, Lima Barreto, Monteiro Lobato e Augusto dos Anjos', 'Machado, Alencar, Bilac e Drummond', 'Oswald, Mário, Cabral e Clarice', 'Castro Alves, Gregório, Vieira e Gonçalves Dias'], a: 0, why: 'Esses quatro nomes representam vertentes diversas do Pré‑Modernismo: sertão, subúrbio, interior rural e poesia de angústia com linguagem científica.' },
+  { topic: 'Policarpo Quaresma', q: 'O “triste fim” de Policarpo nasce principalmente do choque entre...', options: ['campo e cidade', 'amor e ciúme', 'patriotismo idealizado e realidade autoritária', 'português e tupi'], a: 2, why: 'A língua tupi é apenas um episódio. O arco completo mostra um idealista que descobre burocracia, desigualdade e violência no país que venerava.' },
+  { topic: 'Policarpo Quaresma', q: 'A proposta de adotar o tupi como língua oficial ajuda Lima Barreto a...', options: ['defender literalmente a troca imediata da língua', 'satirizar o nacionalismo ingênuo e a burocracia', 'explicar a Guerra de Canudos', 'elogiar Floriano Peixoto sem reservas'], a: 1, why: 'O episódio é cômico, mas a crítica é séria: a idealização de Policarpo ignora a complexidade do país, enquanto a burocracia ridiculariza qualquer diferença.' },
+  { topic: 'Os Sertões', q: 'A estrutura de <em>Os Sertões</em> segue qual sequência?', options: ['O Homem · A Terra · A Luta', 'A Luta · A Terra · O Homem', 'A Terra · O Homem · A Luta', 'A República · Canudos · O Sertão'], a: 2, why: 'Euclides parte do ambiente, passa pela formação humana e chega ao conflito: A Terra, O Homem e A Luta.' },
+  { topic: 'Os Sertões', q: 'Ao longo da experiência de Canudos, a visão de Euclides da Cunha...', options: ['permaneceu favorável à destruição do arraial', 'mudou para uma denúncia da violência contra sertanejos', 'deixou de considerar o sertanejo resistente', 'passou a tratar a guerra como ficção'], a: 1, why: 'O autor foi como correspondente com preconceitos do litoral, mas testemunhou fatos que o levaram a denunciar a campanha como um crime contra brasileiros excluídos.' },
+  { topic: 'Interpretação', q: 'Que ideia aproxima <em>Triste Fim de Policarpo Quaresma</em> e <em>Os Sertões</em>?', options: ['Ambas idealizam as autoridades republicanas', 'Ambas mostram o contraste entre Brasil oficial e Brasil real', 'Ambas se passam apenas no sertão baiano', 'Ambas rejeitam qualquer crítica social'], a: 1, why: 'Uma obra parte do indivíduo; a outra, de uma comunidade. As duas revelam que o discurso oficial de progresso encobre autoritarismo, abandono e desigualdade.' }
+];
+
+let examQuestions = [];
+let examIndex = 0;
+let examScore = 0;
+function shuffle(list) { return [...list].sort(() => Math.random() - .5); }
+function startExam() {
+  const mandatory = ['Períodos', 'Adverbiais', 'Adjetivas', 'Pronomes relativos', 'Pré‑Modernismo', 'Policarpo Quaresma', 'Os Sertões', 'Interpretação'];
+  const core = mandatory.map(topic => shuffle(examBank.filter(q => q.topic === topic))[0]);
+  const remaining = shuffle(examBank.filter(q => !core.includes(q))).slice(0, 2);
+  examQuestions = shuffle([...core, ...remaining]);
+  examIndex = 0; examScore = 0;
+  $('#scoreValue').textContent = '0';
+  $('#examResult').classList.add('hidden');
+  $('.exam-shell').classList.remove('hidden');
+  renderExam();
+}
+function renderExam() {
+  const q = examQuestions[examIndex];
+  $('#examNumber').textContent = `Questão ${examIndex + 1} de ${examQuestions.length}`;
+  $('#examTopic').textContent = q.topic;
+  $('#examProgress').style.width = `${((examIndex + 1) / examQuestions.length) * 100}%`;
+  $('#examQuestion').innerHTML = q.q;
+  $('#examOptions').innerHTML = q.options.map((option, i) => `<button data-index="${i}"><span>${String.fromCharCode(65 + i)}.</span> ${option}</button>`).join('');
+  $('#examFeedback').className = 'exam-feedback';
+  $('#nextExam').classList.add('hidden');
+}
+$('#examOptions').addEventListener('click', event => {
+  const button = event.target.closest('button');
+  if (!button || button.disabled) return;
+  const q = examQuestions[examIndex];
+  const picked = Number(button.dataset.index);
+  const right = picked === q.a;
+  if (right) { examScore += 1; $('#scoreValue').textContent = String(examScore); }
+  $$('#examOptions button').forEach((b, i) => { b.disabled = true; if (i === q.a) b.classList.add('correct'); });
+  if (!right) button.classList.add('wrong');
+  const feedback = $('#examFeedback');
+  feedback.className = `exam-feedback show ${right ? '' : 'wrong'}`;
+  feedback.innerHTML = `<strong>${right ? 'Resposta correta.' : 'Resposta incorreta.'}</strong><br>${q.why}`;
+  $('#nextExam').textContent = examIndex === examQuestions.length - 1 ? 'Ver resultado' : 'Próxima questão';
+  $('#nextExam').classList.remove('hidden');
+});
+$('#nextExam').addEventListener('click', () => {
+  if (examIndex < examQuestions.length - 1) { examIndex += 1; renderExam(); }
+  else finishExam();
+});
+function finishExam() {
+  $('.exam-shell').classList.add('hidden');
+  $('#examResult').classList.remove('hidden');
+  $('#finalScore').textContent = String(examScore);
+  const title = examScore >= 9 ? 'Pronto para a prova.' : examScore >= 7 ? 'Boa base!' : examScore >= 5 ? 'Quase lá.' : 'Volte aos pontos-chave.';
+  const text = examScore >= 9
+    ? 'Você reconhece estruturas e interpreta as obras com segurança. Faça a revisão de 60 segundos e descanse.'
+    : examScore >= 7
+      ? 'Seu raciocínio está bem encaminhado. Revise as explicações das questões erradas e tente outra ordem.'
+      : 'Use o mapa acima para rever os assuntos em que hesitou; depois refaça. O objetivo é entender o caminho, não decorar a letra.';
+  $('#resultTitle').textContent = title;
+  $('#resultText').textContent = text;
+  if (window.anime) anime({ targets: '.result-ring', scale: [.5, 1], rotate: [-12, 0], duration: 700, easing: 'easeOutBack' });
+}
+$('#restartExam').addEventListener('click', startExam);
+startExam();
+
+// Mobile thumb navigation follows the current study area and shows page progress.
+const mobileNavLinks = $$('[data-mobile-nav]');
+const mobileSections = ['inicio', 'gramatica', 'literatura', 'simulado'].map(id => document.getElementById(id));
+let mobileScrollQueued = false;
+function updateMobileNavigation() {
+  const scrollTop = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = maxScroll > 0 ? Math.min(1, scrollTop / maxScroll) : 0;
+  $('#mobileProgress').style.width = `calc((100% - 24px) * ${ratio})`;
+  const probe = scrollTop + Math.min(180, window.innerHeight * .28);
+  let active = mobileSections[0];
+  mobileSections.forEach(section => { if (section && section.offsetTop <= probe) active = section; });
+  mobileNavLinks.forEach(link => {
+    const isActive = link.dataset.mobileNav === active?.id;
+    link.classList.toggle('active', isActive);
+    if (isActive) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+  });
+  mobileScrollQueued = false;
+}
+window.addEventListener('scroll', () => {
+  if (!mobileScrollQueued) {
+    mobileScrollQueued = true;
+    requestAnimationFrame(updateMobileNavigation);
+  }
+}, { passive: true });
+window.addEventListener('resize', updateMobileNavigation);
+updateMobileNavigation();
+
+// Fast review accordions
+$$('.flash-item').forEach(item => item.addEventListener('click', () => item.classList.toggle('open')));
+
+// Internal links close any transient state cleanly.
+$$('a[href^="#"]').forEach(link => link.addEventListener('click', () => {
+  const target = $(link.getAttribute('href'));
+  if (target) setTimeout(() => target.classList.add('in-view'), 400);
+}));
+
+</script>
+</body>
+</html>
+
